@@ -1,4 +1,4 @@
-# Ex 1.2.1
+# Test game
 #include <SDL2/SDL.h>
 #include <assert.h>
 
