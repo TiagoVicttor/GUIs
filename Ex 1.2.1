@@ -15,10 +15,19 @@ int main (int argc, char* args[])
 
     /* EXECUÇÃO */
     SDL_Rect player = { 400,650, 25,50 };
+    SDL_Rect n1 = { 400,125, 100,50 };
+    SDL_Rect n2 = { 700,75, 100,50 };
+    SDL_Rect n3 = { 1000,175, 100,50 };
+    SDL_Rect n4 = { 1300,125, 100,50 };
+    SDL_Rect n5 = { 1600,50, 100,50 };
+    SDL_Rect sol = { -100,75, 100,100 };
+    //SDL_Rect lua = {1920,75,100,100};
+    
     SDL_Event evt;
-    int espera = 100;
+    int espera = 16;
     int pulando = 0;
     int descendo = 0;
+    
     while(!SDL_QuitRequested()){
     	SDL_SetRenderDrawColor(ren, 0xbb,0xf3,0xf9,0x00);
 	    SDL_RenderClear(ren);
@@ -29,31 +38,49 @@ int main (int argc, char* args[])
 	    SDL_Rect grama = { 0,700, 1920,50 };
 	    SDL_RenderFillRect(ren, &grama);
 	    SDL_SetRenderDrawColor(ren, 0xf3,0xf0,0x63,0x00);
-	    SDL_Rect sol = { 100,75, 100,100 };
 	    SDL_RenderFillRect(ren, &sol);
+	    //SDL_SetRenderDrawColor(ren, 0xf6,0xf1,0xD5,0x00);
+	    //SDL_RenderFillRect(ren, &lua);
 	    SDL_SetRenderDrawColor(ren, 0xff,0xff,0xff,0x00);
-	    SDL_Rect n1 = { 400,125, 100,50 };
 	    SDL_RenderFillRect(ren, &n1);
 	    SDL_SetRenderDrawColor(ren, 0xff,0xff,0xff,0x00);
-	    SDL_Rect n2 = { 700,75, 100,50 };
 	    SDL_RenderFillRect(ren, &n2);
 	    SDL_SetRenderDrawColor(ren, 0xff,0xff,0xff,0x00);
-	    SDL_Rect n3 = { 1000,175, 100,50 };
 	    SDL_RenderFillRect(ren, &n3);
 	    SDL_SetRenderDrawColor(ren, 0xff,0xff,0xff,0x00);
-	    SDL_Rect n4 = { 1300,125, 100,50 };
 	    SDL_RenderFillRect(ren, &n4);
-	    SDL_SetRenderDrawColor(ren, 0xff,0xff,0xff,0x00);
-	    SDL_Rect n5 = { 1600,50, 100,50 };
-	    SDL_RenderFillRect(ren, &n5);
-	    SDL_SetRenderDrawColor(ren, 0x00,0x00,0x00,0x00);
+		SDL_SetRenderDrawColor(ren, 0x00,0x00,0x00,0x00);
 	    SDL_RenderFillRect(ren, &player);
+	    SDL_SetRenderDrawColor(ren, 0xff,0xff,0xff,0x00);
+	    SDL_RenderFillRect(ren, &n5);
 	    SDL_RenderPresent(ren);
 	    
-	    SDL_Event evt;
+	    n1.x += 2;
+        n2.x += 2;
+        n3.x += 2;
+        n4.x += 2;
+        n5.x += 2;
+        sol.x += 1;
+
+        
+        if (n1.x >= 1920){
+        	n1.x = -50;
+		} else if (n2.x >= 1920){
+        	n2.x = -50;
+		} else if (n3.x >= 1920){
+        	n3.x = -50;
+		} else if (n4.x >= 1920){
+        	n4.x = -50;
+		} else if (n5.x >= 1920){
+        	n5.x = -50;
+		}
+		if (sol.x >= 1920){
+        	sol.x = -100;
+        }
+		
+
         int isevt = SDL_WaitEventTimeout(&evt, espera);
         if (isevt) {
-        	
             if (evt.type == SDL_KEYDOWN) {
                 switch (evt.key.keysym.sym) {
                     case SDLK_UP:
@@ -82,7 +109,7 @@ int main (int argc, char* args[])
 				pulando = 0;
 			}
 		}
-		
+
 	}
 	
 	SDL_DestroyRenderer(ren);
