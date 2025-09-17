@@ -1,1 +1,51 @@
+#include <SDL2/SDL.h>
+#include <assert.h>
 
+int main (int argc, char* args[])
+{
+    /* INICIALIZACAO */
+    SDL_Init(SDL_INIT_EVERYTHING);
+    SDL_Window* win = SDL_CreateWindow("Ex 1.2.1",
+                         SDL_WINDOWPOS_UNDEFINED,
+                         SDL_WINDOWPOS_UNDEFINED,
+                         1920, 950, SDL_WINDOW_SHOWN
+                      );
+    SDL_Renderer* ren = SDL_CreateRenderer(win, -1, 0);
+
+    /* EXECUÇÃO */
+    SDL_Rect n1 = { 400,125, 100,50 };
+    SDL_Rect n2 = { 700,75, 100,50 };
+    SDL_Rect n3 = { 1000,175, 100,50 };
+    SDL_Rect n4 = { 1300,125, 100,50 };
+    SDL_Rect n5 = { 1600,50, 100,50 };
+    SDL_Rect sol = { 100,75, 100,100 };
+    
+    while(!SDL_QuitRequested()){
+    	SDL_SetRenderDrawColor(ren, 0xbb,0xf3,0xf9,0x00);
+	    SDL_RenderClear(ren);
+	    SDL_SetRenderDrawColor(ren, 0xd0,0x9d,0x6a,0x00);
+	    SDL_Rect terra = { 0,700, 1920,250 };
+	    SDL_RenderFillRect(ren, &terra);
+	    SDL_SetRenderDrawColor(ren, 0x05,0xee,0x07,0x00);
+	    SDL_Rect grama = { 0,700, 1920,50 };
+	    SDL_RenderFillRect(ren, &grama);
+	    SDL_SetRenderDrawColor(ren, 0xf3,0xf0,0x63,0x00);
+	    SDL_RenderFillRect(ren, &sol);
+	    SDL_SetRenderDrawColor(ren, 0xff,0xff,0xff,0x00);
+	    SDL_RenderFillRect(ren, &n1);
+	    SDL_SetRenderDrawColor(ren, 0xff,0xff,0xff,0x00);
+	    SDL_RenderFillRect(ren, &n2);
+	    SDL_SetRenderDrawColor(ren, 0xff,0xff,0xff,0x00);
+	    SDL_RenderFillRect(ren, &n3);
+	    SDL_SetRenderDrawColor(ren, 0xff,0xff,0xff,0x00);
+	    SDL_RenderFillRect(ren, &n4);
+	    SDL_SetRenderDrawColor(ren, 0xff,0xff,0xff,0x00);
+	    SDL_RenderFillRect(ren, &n5);
+	    SDL_RenderPresent(ren);
+	}
+	
+	SDL_DestroyRenderer(ren);
+	SDL_DestroyWindow(win);
+    SDL_Quit();
+    
+}
